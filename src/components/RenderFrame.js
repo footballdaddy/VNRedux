@@ -18,7 +18,7 @@ class RenderFrame extends React.Component {
     return (
       <Fragment>
         {battleSwitch == 'none' ? (
-          <div onClick={this.props.setNextFrame}>
+          <div>
             <div>
               <ReactCSSTransitionGroup
                 component="div"
@@ -49,7 +49,7 @@ class RenderFrame extends React.Component {
                 )}
               </ReactCSSTransitionGroup>
               {this.props.text && this.props.textBoxShown ? (
-                <div className="text-box">
+                <div className="text-box" onClick={this.props.setNextFrame}>
                   {this.props.speaker ? (
                     <div className="speaker"> {this.props.speaker} </div>
                   ) : null}
@@ -63,7 +63,7 @@ class RenderFrame extends React.Component {
             </div>
           </div>
         ) : (
-          <TestRender />
+          <TestRender nextScene={this.props.setNextFrame} />
         )}
       </Fragment>
     );
