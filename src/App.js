@@ -23,16 +23,16 @@ class App extends Component {
     ============================================================================================ */
 
   setFrameFromChoice(choice) {
-    const updatedChoicesCount = update(this.props.story.choicesCount, {
-      [choice]: { $apply: currentValue => currentValue + 1 },
-    });
+    const updatedChoicesCount = [...this.props.story.route, choice];
     // Routes depending on choice
-    if (updatedChoicesCount.throwRock === 1) {
+    this.props.setFrameFromChoice(updatedChoicesCount);
+    // updatedChoicesCount
+    // updatedChoicesCount[updatedChoicesCount.length - 1].includes
+    if (updatedChoicesCount.includes('throwRock')) {
       this.setFrame(10);
-    } else if (updatedChoicesCount.noRock === 1) {
+    } else if (updatedChoicesCount.includes('noRock')) {
       this.setFrame(27);
     }
-    this.props.setFrameFromChoice(updatedChoicesCount);
   }
 
   setNextFrame() {
@@ -85,6 +85,7 @@ class App extends Component {
         speaker={this.props.story.speaker}
         text={this.props.story.text}
         textBoxShown={this.props.story.textBoxShown}
+        index={this.props.story.index}
       />
     );
   }
@@ -315,7 +316,7 @@ class App extends Component {
           {this.props.story.saveMenuShown ? this.saveMenu() : null}
           {this.props.story.loadMenuShown ? this.loadMenu() : null}
           {this.props.story.backlogShown ? this.backlog() : null}
-          {this.props.story.frameIsRendering ? this.renderFrame() : null}
+          {/* {this.props.story.frameIsRendering ? this.renderFrame() : null} */}
           {this.props.story.choicesExist ? this.renderChoiceMenu() : null}
         </ReactCSSTransitionGroup>
         {!this.props.story.titleScreenShown ? this.renderMenuButtons() : null}

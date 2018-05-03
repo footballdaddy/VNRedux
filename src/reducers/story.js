@@ -20,6 +20,7 @@ const initialState = {
   indexHistory: [],
   choiceOptions: [],
   choicesIndex: 0,
+  route: [],
 };
 
 export const setFrameFromChoice = updatedChoicesCount => ({
@@ -107,7 +108,7 @@ export default (state = initialState, action) => {
     case 'SET_FRAME_FROM_CHOICE':
       return {
         ...state,
-        choicesCount: action.updatedChoicesCount,
+        route: action.updatedChoicesCount,
       };
     case 'SET_NEXT_CHOICE_DATA':
       return {
