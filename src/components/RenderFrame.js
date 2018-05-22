@@ -1,23 +1,11 @@
 import React, { Fragment } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import TestRender from './TestRender';
-class RenderFrame extends React.Component {
-  renderSwitch(param) {
-    console.log(param);
-    switch (param) {
-      case 1:
-        return 'byesa';
-      default:
-        return 'none';
-    }
-  }
 
+class RenderFrame extends React.Component {
   render() {
-    let battleSwitch = this.renderSwitch(this.props.index);
     return (
       <Fragment>
-        {battleSwitch == 'none' ? (
           <div>
             <div>
               <ReactCSSTransitionGroup
@@ -62,9 +50,6 @@ class RenderFrame extends React.Component {
               ) : null}
             </div>
           </div>
-        ) : (
-          <TestRender nextScene={this.props.setNextFrame} />
-        )}
       </Fragment>
     );
   }

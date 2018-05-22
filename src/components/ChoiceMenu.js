@@ -1,13 +1,14 @@
-import React from 'react';
-import ChoiceOption from '../components/ChoiceOption';
+import React from "react";
+import ChoiceOption from "../components/ChoiceOption";
 
 function ChoiceMenu(props) {
   function renderChoiceOptions(key) {
     return (
       <ChoiceOption
         key={key.content}
-        answerContent={key.content}
-        answerType={key.type}
+        content={key.content}
+        store={key.store}
+        jumpToBecauseChoice={key.jumpToBecauseChoice}
         onChoiceSelected={props.onChoiceSelected}
       />
     );

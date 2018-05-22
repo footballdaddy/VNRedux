@@ -22,17 +22,20 @@ class App extends Component {
        Diverges to different index depending on user's choice. Important function for VN writers
     ============================================================================================ */
 
-  setFrameFromChoice(choice) {
-    const updatedChoicesCount = [...this.props.story.route, choice];
-    // Routes depending on choice
-    this.props.setFrameFromChoice(updatedChoicesCount);
-    // updatedChoicesCount
-    // updatedChoicesCount[updatedChoicesCount.length - 1].includes
-    if (updatedChoicesCount.includes('throwRock')) {
-      this.setFrame(10);
-    } else if (updatedChoicesCount.includes('noRock')) {
-      this.setFrame(27);
-    }
+  setFrameFromChoice(choice, jumpToBecauseChoice) {
+      for (let i = 0; i < novelFrames.length; i++) {
+        if (jumpToBecauseChoice === novelFrames[i].routeBegins) {
+          this.setFrame(i);
+        }
+      }
+
+      let choicesStore = Object.assign({}, this.state.choicesStore);
+      if (choicesStore[choice]) {
+        choicesStore[choice]++;
+      } else {
+        choicesStore[choice] = 1;
+      }
+      this.props.setFrameFromChoice({ choicesStore });
   }
 
   setNextFrame() {
@@ -103,12 +106,12 @@ class App extends Component {
     this.props.setNextChoiceData(choicesIndex, Choices[choicesIndex].choices);
   }
 
+
   handleChoiceSelected(event) {
     this.stopSkip();
-    this.setFrameFromChoice(event.currentTarget.name);
+    this.setFrameFromChoice(event.currentTarget.name, event.currentTarget.id);
     this.setNextChoice();
   }
-
   renderChoiceMenu() {
     return (
       <ChoiceMenu

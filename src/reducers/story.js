@@ -2,6 +2,7 @@ import update from 'immutability-helper';
 import novelFrames from '../api/novelFrames';
 
 const initialState = {
+  choicesStore: {},
   choicesCount: {
     throwRock: 0,
     noRock: 0,
@@ -23,9 +24,9 @@ const initialState = {
   route: [],
 };
 
-export const setFrameFromChoice = updatedChoicesCount => ({
+export const setFrameFromChoice = choicesStore => ({
   type: 'SET_FRAME_FROM_CHOICE',
-  updatedChoicesCount,
+  choicesStore,
 });
 
 export const setFrame = index => ({
@@ -108,7 +109,7 @@ export default (state = initialState, action) => {
     case 'SET_FRAME_FROM_CHOICE':
       return {
         ...state,
-        route: action.updatedChoicesCount,
+        choicesStore: action.choicesStore,
       };
     case 'SET_NEXT_CHOICE_DATA':
       return {
